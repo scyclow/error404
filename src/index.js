@@ -7,17 +7,10 @@ const canvas = document.getElementById('canvas');
 resize.onResize(resize.setHeight);
 resize.setHeight(window.innerWidth, window.innerHeight);
 
-// function randHex() {
-//   let color = '#';
-//   for (let i = 0; i < 6; i++) {
-//     color += random(16).toString(16);
-//   }
-//   return color.toUpperCase();
-// }
-
+// Ideally this would only be 1 px, but 5 is more performant
 const statSize = 5;
 
-function doSomething(ctx) {
+function staticFrame(ctx) {
   let width = range(0, window.innerWidth, statSize);
   let height = range(0, window.innerHeight, statSize);
 
@@ -31,12 +24,7 @@ function doSomething(ctx) {
 
 function draw(ctx) {
   setInterval(() => {
-    doSomething(ctx,
-      Math.random() > 0.5,
-      Math.random() > 0.95,
-      // Math.random() > 0.1
-      true
-    );
+    staticFrame(ctx);
   }, 10);
 }
 

@@ -1,9 +1,9 @@
 {
   "author": "Steve Pikelny",
   "license": "MIT",
-  "name": "es6-skel",
+  "name": "404",
   "version": "0.1.0",
-  "description": "Build skeleton for ES6 project",
+  "description": "Error page",
   "main": "src/index.js",
   "repository": {
     "type": "git",
@@ -12,7 +12,9 @@
   "scripts": {
     "clean": "rimraf build",
     "watch": "npm run clean && webpack && webpack --watch",
-    "unit": "karma start"
+    "unit": "karma start",
+    "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
+    "build": "npm run clean && npm run build:webpack"
   },
   "dependencies": {
     "babel-polyfill": "^6.6.1",

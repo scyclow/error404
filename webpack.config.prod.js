@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 var compileFiles = /\.js$/;
 var ignoredFolders = /node_modules/;
 
@@ -10,11 +11,19 @@ module.exports = {
     filename: 'error.js'
   },
 
-  devtool: 'source-map',
-
-  eslint: {
-    configFile: __dirname + '/.eslintrc'
-  },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      }
+    })
+  ],
 
   module: {
     preLoaders: [

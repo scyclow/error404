@@ -15,10 +15,12 @@
   font-family: 'Inconsolata', sans-serif;
   font-size: 41px;
   text-transform: uppercase;;
-  width: 8em;
-  height: 4em;
+  padding: 0.5em;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.message {
+  text-align: center;
 }
