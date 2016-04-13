@@ -13,12 +13,16 @@
 
 #error-content {
   font-family: 'Inconsolata', sans-serif;
-  font-size: 41px;
+  font-size: 40px;
   text-transform: uppercase;;
   padding: 0.5em;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.8);
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.code {
+  font-size: 60px;
 }
 
 .message {
