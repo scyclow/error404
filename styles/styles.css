@@ -1,3 +1,7 @@
+body {
+  background-color: #FFFFFF;
+}
+
 #error {
   position: fixed;
   width: 100%;

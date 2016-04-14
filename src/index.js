@@ -1,23 +1,32 @@
 import { sample, range, each } from 'lodash';
 import resize from './utils/resizeWindow';
 import createNoise from './utils/createNoise';
+import onMouseMove from './utils/onMouseMove';
 
 const canvas = document.getElementById('canvas');
 
 resize.onResize(resize.setHeight);
 resize.setHeight(window.innerWidth, window.innerHeight);
 
-// Ideally this would only be 1 px, but 5 is more performant
-const statSize = 5;
+let statSize = 5;
+
+onMouseMove((x, y) => {
+  statSize = Math.floor(3 + (y / 80));
+});
 
 function staticFrame(ctx) {
+  // clear the frame
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
   let width = range(0, window.innerWidth, statSize);
   let height = range(0, window.innerHeight, statSize);
+  ctx.fillStyle = '#000000';
 
   each(width, x => {
     each(height, y => {
-      ctx.fillStyle = sample(['#000000', '#ffffff']);
-      ctx.fillRect(x, y, statSize, statSize);
+      if (Math.random() > 0.5) {
+        ctx.fillRect(x, y, statSize, statSize);
+      }
     });
   });
 }
@@ -25,7 +34,7 @@ function staticFrame(ctx) {
 function draw(ctx) {
   setInterval(() => {
     staticFrame(ctx);
-  }, 10);
+  }, 15);
 }
 
 function withCanvas(fn) {
