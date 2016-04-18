@@ -1,43 +1,36 @@
-import resize from './utils/resizeWindow';
-const { onResize, setHeight } = resize;
+import { onResize, setHeight } from './utils/resizeWindow';
 import createNoise from './utils/createNoise';
 import onMouseMove from './utils/onMouseMove';
 
 onResize(setHeight);
 setHeight(window.innerWidth, window.innerHeight);
 
-let statSize = 3;
+const minStatSize = 3;
+let statSize = minStatSize;
 
 onMouseMove((x, y) => {
-  statSize = Math.floor(3 + (y / 80));
+  statSize = Math.floor(minStatSize + (y / 80));
 });
 
 function staticFrame(ctx) {
   // clear the frame
   ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-  // for some reason this seems more performant than just
-  // using for loops that increment by statSize
-  let width = [], height = [];
-  for (let x = 0; x < window.innerWidth; x += statSize) {
-    width.push(x);
-  }
-  for (let y = 0; y < window.innerHeight; y += statSize) {
-    height.push(y);
-  }
+  const width = window.innerWidth;
+  const height = window.innerHeight;
 
-  ctx.fillStyle = '#000000';
-
-  width.forEach(x => {
-    height.forEach(y => {
+  for (let x = 0; x < width; x += statSize) {
+    for (let y = 0; y < height; y += statSize) {
       if (Math.random() > 0.5) {
         ctx.fillRect(x, y, statSize, statSize);
       }
-    });
-  });
+    }
+  }
 }
 
 function draw(ctx) {
+  ctx.fillStyle = '#000000';
+
   setInterval(() => {
     staticFrame(ctx);
   }, 15);
@@ -53,4 +46,4 @@ function withCanvas(can, fn) {
 const canvas = document.getElementById('canvas');
 withCanvas(canvas, draw);
 createNoise();
-console.log('Source: https://github.com/scyclow/error404')
+console.log('Source: https://github.com/scyclow/error404'); // eslint-disable-line
